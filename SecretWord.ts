@@ -43,36 +43,28 @@ export class SecretWord{
         return this.word;
     }
 
-    RevealLetter(letter:string):void{
-        this.revealedWord.replace(this.revealedWord[this.word.search(letter)] , letter);
+    RevealLetter(letter:string):boolean{
+        /* this.revealedWord.replace(this.revealedWord[this.word.search(letter)] , letter); */
+        let tempRevealedWordArray: string[] = new Array<string>();
+        let tempWordArray: string[] = new Array<string>();
+        let tempBool: boolean = false;
+
+        tempRevealedWordArray = this.revealedWord.split(/(?=[\s\S])/u);
+        tempWordArray = this.word.split(/(?=[\s\S])/u);
+
+        for (let index = 0; index < tempWordArray.length; index++) {
+            if (tempWordArray[index] == letter) {
+                tempRevealedWordArray[index] = letter;
+                tempBool = true;
+            }
+        }
+        this.revealedWord = tempRevealedWordArray.join('');
+
+        return tempBool;
     }
 
-    
-    RevealLetter2(letter:string):boolean{
-        this.revealedLetters.forEach(element => {
-            // Er der allerede fundet bogstaver med bogstavet i "letter"?
-            if (this.revealedLetters.includes(letter)) {
-                return false;
-            }
 
-            else
-            {
-                for (let index = 0; index < this.word.length; index++) {
-                    if (this.word.search(letter) != -1) {
-                        this.revealedWord.replace(this.revealedWord[this.word.search(letter)] , letter);
-                    }
-                    else{
-                        break;
-                    }
-                }
-
-                return true;
-            }
-        });
-        return false;
-    }
-
-    toString():string{
+    GetRevealedWord():string{
         
         return this.revealedWord;
     }

@@ -24,18 +24,17 @@ buttonEnterLetterElement.addEventListener("click", MouseEvent => {
 
 buttonGetWordElement.addEventListener("click", MouseEvent => {
     GetWordAsync();
-    secretWordElement.innerHTML = SecretWordClass.toString().split('').join(' ');
 })
 
 buttonStartGameElement.addEventListener("click", MouseEvent => {
-    
+    secretWordElement.innerHTML = SecretWordClass.GetRevealedWord().split('').join(' ');
 })
 
 buttonEnterLetterElement.addEventListener("click", MouseEvent =>{
        
       SecretWordClass.RevealLetter(inputLetterElement.value);
-      secretWordElement.innerHTML = SecretWordClass.toString().split('').join(' ');
-    
+      secretWordElement.innerHTML = SecretWordClass.GetRevealedWord().split('').join(' ');
+        inputLetterElement.value = "";
 })
 
 async function GetWordAsync(){
