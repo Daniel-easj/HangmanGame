@@ -17,6 +17,7 @@ let SecretWordClass: SecretWord = new SecretWord(1,8,5);
 
 let canvasThings: Canvas = new Canvas();
 
+let incorrectGuesses: number = 0;
 
 buttonEnterLetterElement.addEventListener("click", MouseEvent => {
     
@@ -31,11 +32,24 @@ buttonStartGameElement.addEventListener("click", MouseEvent => {
 })
 
 buttonEnterLetterElement.addEventListener("click", MouseEvent =>{
-       
-      SecretWordClass.RevealLetter(inputLetterElement.value);
-      secretWordElement.innerHTML = SecretWordClass.GetRevealedWord().split('').join(' ');
-        inputLetterElement.value = "";
+       HandleRevealLetter();
 })
+
+function HandleRevealLetter(){
+    if (!SecretWordClass.RevealLetter(inputLetterElement.value)) {
+        incorrectLettersElement.innerHTML += inputLetterElement.value + " ";
+
+        incorrectGuesses++;
+        if (incorrectGuesses == 6) {
+            incorrectLettersElement.innerHTML = "You lost idiot"
+        }
+        canvasThings.DrawHangman(incorrectGuesses);
+    }
+    
+    secretWordElement.innerHTML = SecretWordClass.GetRevealedWord().split('').join(' ');
+      inputLetterElement.value = "";
+
+}
 
 async function GetWordAsync(){
     await SecretWordClass.GetWord();

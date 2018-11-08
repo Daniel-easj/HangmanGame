@@ -47,7 +47,7 @@ export class SecretWord{
         /* this.revealedWord.replace(this.revealedWord[this.word.search(letter)] , letter); */
         let tempRevealedWordArray: string[] = new Array<string>();
         let tempWordArray: string[] = new Array<string>();
-        let tempBool: boolean = false;
+        let foundLetter: boolean = false;
 
         tempRevealedWordArray = this.revealedWord.split(/(?=[\s\S])/u);
         tempWordArray = this.word.split(/(?=[\s\S])/u);
@@ -55,12 +55,12 @@ export class SecretWord{
         for (let index = 0; index < tempWordArray.length; index++) {
             if (tempWordArray[index] == letter) {
                 tempRevealedWordArray[index] = letter;
-                tempBool = true;
+                foundLetter = true;
             }
         }
         this.revealedWord = tempRevealedWordArray.join('');
 
-        return tempBool;
+        return foundLetter;
     }
 
 

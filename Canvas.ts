@@ -9,13 +9,31 @@ export class Canvas{
         this.ctx.fillStyle = "#FF0000";
     }
 
-    DrawFullBody():void{
-        this.DrawHead();
-        this.DrawBody();
-        this.DrawLeftHand();
-        this.DrawRightHand();
-        this.DrawLeftFoot();
-        this.DrawrightFoot();
+    DrawHangman(incorrectGuesses: number):void{
+        
+        switch (incorrectGuesses) {
+            case 1:
+            this.DrawHead();
+                break;
+            case 2:
+            this.DrawBody();
+                break;
+            case 3:
+            this.DrawLeftHand();
+                break;
+            case 4:
+            this.DrawRightHand();
+                break;
+            case 5:
+            this.DrawLeftFoot();
+                break;
+            case 6:
+            this.DrawrightFoot();
+                break;
+            default:
+                break;
+        }
+        
     }
     
     DrawHead(): void{
